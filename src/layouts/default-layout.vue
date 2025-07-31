@@ -8,6 +8,7 @@
         theme="dark"
       >
         <img :src="logo" alt="" height="32" class="logo" />
+        <span style="color: white; font-size: 18px; margin-left: 28px;margin-top: 10px;">AI-NOUS</span>
         <a-menu-item v-for="item in menuConfigList" :key="item.path">
           <RouterLink :to="item.path">{{ item.name }}</RouterLink>
         </a-menu-item>
@@ -100,7 +101,7 @@ export default defineComponent({
 
   .logo {
     position: relative;
-    left: 35px;
+    left: 20px;
     margin: 10px auto;
   }
 }

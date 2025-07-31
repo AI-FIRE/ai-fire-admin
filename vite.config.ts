@@ -27,18 +27,18 @@ export default defineConfig({
     //   ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue']
   },
   server: {
-    // proxy: {
-    //   '/api': {
-    //     target: 'https://test-blog.helloworld.net/api/admin/',
-    //     changeOrigin: true
-    //     // rewrite: (path) => path.replace(/^\/api/, '')
-    //   },
-    //   '/static': {
-    //     target: 'http://192.168.168.10:29091',
-    //     changeOrigin: true
-    //   }
-    // },
-    // hmr: true
+    proxy: {
+      '/api': {
+        target: 'http://localhost:29090',
+        changeOrigin: true
+        // rewrite: (path) => path.replace(/^\/api/, '')
+      },
+      '/static': {
+        target: 'http://192.168.168.10:29091',
+        changeOrigin: true
+      }
+    },
+    hmr: true
   },
   css: {
     preprocessorOptions: {

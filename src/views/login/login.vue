@@ -1,7 +1,7 @@
 <template>
   <div class="login-page">
     <div class="login-content">
-      <div class="title">flygoose 博客管理系统</div>
+      <div class="title">博客管理系统</div>
       <a-form
         :model="formState"
         name="normal_login"
