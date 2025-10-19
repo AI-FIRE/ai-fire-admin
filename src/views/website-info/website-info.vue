@@ -3,13 +3,13 @@
     <a-button style="margin-bottom: 10px" class="create" type="primary" @click="handleEdit"
       >更改网站信息</a-button
     >
-    <!-- <a-button class="create" type="primary" @click="createSite">创建网站信息</a-button> -->
-    <!-- <Table :data-source="dataSource" :columns="columns" ref="table" @edit="edit">
+    <a-button class="create" type="primary" @click="createSite">创建网站信息</a-button>
+    <Table :data-source="dataSource" :columns="columns" ref="table" @edit="edit" @change="handleTableChange">
       <template #[item]="data" v-for="item in Object.keys($slots)">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
-    </Table> -->
-    <a-descriptions bordered>
+    </Table>
+    <a-descriptions bordered style="margin-top: 20px;">
       <a-descriptions-item label="网站标题">{{ websiteInfo.title }}</a-descriptions-item>
       <a-descriptions-item label="网站slogan" :span="2">{{
         websiteInfo.slogan
@@ -45,14 +45,14 @@ import { message } from 'ant-design-vue'
 
 const useWebsiteInfoStore = useWebsiteInfoStoreWithOut()
 
-const dataSource = ref<Record<string, string>[]>([])
+const dataSource = ref<Record<string, string | number>[]>([])
 const websiteInfo = ref<Record<string, string | number>>({})
 const imageUrl = computed(() => {
   return websiteInfo.value.cover ? String(websiteInfo.value.cover) : undefined
 })
 const title = ref<string>('')
 const visible = ref<boolean>(false)
-const columns: Record<string, string>[] = [
+const columns: Record<string, string | Record<string, any>>[] = [
   {
     title: '网站标题',
     dataIndex: 'title',
@@ -61,7 +61,7 @@ const columns: Record<string, string>[] = [
   {
     title: '网站简介',
     dataIndex: 'intro',
-    key: 'title'
+    key: 'intro'
   },
   {
     title: '网站slogan',
@@ -87,7 +87,10 @@ const columns: Record<string, string>[] = [
   {
     title: '状态',
     key: 'status',
-    dataIndex: 'status'
+    dataIndex: 'status',
+    customRender: (text: any) => {
+      return text === 1 ? '已上架' : text === 0 ? '已下架' : ''
+    }
   },
   {
     title: '操作',
@@ -176,8 +179,17 @@ onMounted(() => {
 
 const getSiteInfoList = async () => {
   const siteInfoList = await useWebsiteInfoStore.getSiteInfoListAction()
+  console.log(siteInfoList)
+  if (siteInfoList === null || siteInfoList[0] === null) return
   dataSource.value = siteInfoList
   if (siteInfoList.length > 0) websiteInfo.value = { ...siteInfoList[0] }
+}
+
+// 处理表格选中事件，切换显示的数据
+const handleTableChange = (selectedRowKeys: any, selectedRows: any) => {
+  if (selectedRows && selectedRows.length > 0) {
+    websiteInfo.value = { ...selectedRows[0] }
+  }
 }
 
 const newFormDataChange = (val: any) => {
@@ -196,13 +208,14 @@ const edit = (record: any) => {
   visible.value = true
   formData.value = record
 }
-// 更改成表单后新编辑逻辑处理
+
 const handleEdit = () => {
   curOperation.value = Operation.Edit
   title.value = '修改网站信息'
   visible.value = true
   formData.value = { ...websiteInfo.value }
 }
+
 const confirm = async (cb: any) => {
   try {
     if (curOperation.value === Operation.Add) {

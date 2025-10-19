@@ -29,12 +29,14 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
+        // target: 'http://60.205.182.150:29090',
         target: 'http://localhost:29090',
         changeOrigin: true
         // rewrite: (path) => path.replace(/^\/api/, '')
       },
       '/static': {
-        target: 'http://192.168.168.10:29091',
+        // target: 'http://192.168.168.10:29091',
+        target: 'http://localhost:29090',
         changeOrigin: true
       }
     },
