@@ -70,3 +70,19 @@ export const updateBlogStatus = (data: any): Promise<any> => {
     data
   })
 }
+
+export const createBlog = (data: any): Promise<any> => {
+  return request<{ token: string }>({
+    url: '/admin/blog/createBlog',
+    method: 'POST',
+    data
+  })
+}
+
+export const getBlogListByStatus = (data: any): Promise<any> => {
+  return request<{ token: string }>({
+    url: '/admin/blog/getBlogListByStatus',
+    method: 'POST',
+    data
+  })
+}

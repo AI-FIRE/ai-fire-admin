@@ -49,7 +49,7 @@
 import { useUserStoreWithOut } from '@/stores/module/user'
 import { defineComponent, reactive, computed } from 'vue'
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue'
-import md5 from 'js-md5'
+import { md5 } from 'js-md5'
 const userStore = useUserStoreWithOut()
 
 interface FormState {

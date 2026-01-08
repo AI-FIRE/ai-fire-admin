@@ -45,14 +45,14 @@ import { message } from 'ant-design-vue'
 
 const useWebsiteInfoStore = useWebsiteInfoStoreWithOut()
 
-const dataSource = ref<Record<string, string | number>[]>([])
-const websiteInfo = ref<Record<string, string | number>>({})
+const dataSource = ref<Record<string, any>[]>([])
+const websiteInfo = ref<Record<string, any>>({})
 const imageUrl = computed(() => {
   return websiteInfo.value.cover ? String(websiteInfo.value.cover) : undefined
 })
 const title = ref<string>('')
 const visible = ref<boolean>(false)
-const columns: Record<string, string | Record<string, any>>[] = [
+const columns: Record<string, any>[] = [
   {
     title: '网站标题',
     dataIndex: 'title',

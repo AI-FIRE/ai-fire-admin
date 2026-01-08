@@ -46,10 +46,14 @@ export default defineComponent({
       }
       if (info.file.status === 'done') {
         // Get this url from response in real world.
-        getBase64(info.file.originFileObj, (base64Url: string) => {
-          imageUrl.value = base64Url
+        if (info.file.originFileObj) {
+          getBase64(info.file.originFileObj as Blob, (base64Url: string) => {
+            imageUrl.value = base64Url
+            loading.value = false
+          })
+        } else {
           loading.value = false
-        })
+        }
       }
       if (info.file.status === 'error') {
         loading.value = false
@@ -57,12 +61,14 @@ export default defineComponent({
       }
     }
 
-    const beforeUpload = (file: UploadProps['fileList'][number]) => {
-      const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
+    const beforeUpload: UploadProps['beforeUpload'] = (file) => {
+      const fileType = (file as any)?.type as string | undefined
+      const fileSize = Number((file as any)?.size || 0)
+      const isJpgOrPng = fileType === 'image/jpeg' || fileType === 'image/png'
       if (!isJpgOrPng) {
         message.error('You can only upload JPG file!')
       }
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isLt2M = fileSize / 1024 / 1024 < 2
       if (!isLt2M) {
         message.error('Image must smaller than 2MB!')
       }

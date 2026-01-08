@@ -83,6 +83,10 @@ export default defineComponent({
         {
           name: '公告管理',
           path: '/notice'
+        },
+        {
+          name: '文章生成',
+          path: '/articleGenerate'
         }
       ]
     }

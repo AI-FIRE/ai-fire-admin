@@ -22,6 +22,7 @@ import SectionDetail from '@/views/special/sectionDetail.vue'
 import LinkList from '@/views/link/index.vue'
 import Banner from '@/views/banner/index.vue'
 import Notice from '@/views/notice/index.vue'
+import ArticleGenerate from '@/views/article-generate/index.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -144,6 +145,14 @@ const routes: RouteRecordRaw[] = [
         component: Banner,
         meta: {
           name: '轮播图'
+        }
+      },
+      {
+        path: '/articleGenerate',
+        name: 'ArticleGenerate',
+        component: ArticleGenerate,
+        meta: {
+          name: '文章生成'
         }
       }
     ]

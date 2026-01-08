@@ -46,7 +46,7 @@ import Modal from '@/components/modal.vue'
 import { onMounted, reactive, ref, computed } from 'vue'
 import type { IFormCinfig } from '@/components/types/form'
 import { message } from 'ant-design-vue'
-import * as api from '@/apis/banner.ts'
+import * as api from '@/apis/banner'
 
 import { NORMALSTATUS, NORMALSTATUSENUM } from '@/utils/constant'
 
