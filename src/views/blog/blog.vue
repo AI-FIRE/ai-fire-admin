@@ -71,7 +71,7 @@ import { onMounted, reactive, ref } from 'vue'
 import VueMarkdownEditor, { xss } from '@kangc/v-md-editor'
 import { useRouter } from 'vue-router'
 import * as api from '@/apis/blog'
-import { message } from 'ant-design-vue'
+import { message, Modal } from 'ant-design-vue'
 import { STATUSENUM, STATUSLIST } from '@/utils/constant'
 import dayjs from 'dayjs'
 const router = useRouter()
@@ -89,6 +89,23 @@ const editStatus = (blog: blog) => {
   state.pickStatus = blog.status
   state.pickId = blog.id
   visible.value = true
+}
+
+const deleteBlog = (blog: blog) => {
+  Modal.confirm({
+    title: '确认删除该博客吗？',
+    content: '删除后将变为已下架状态，可通过筛选查看。',
+    okText: '删除',
+    okType: 'danger',
+    cancelText: '取消',
+    async onOk() {
+      await api.deleteBlog({
+        id: blog.id
+      })
+      message.success('删除成功')
+      getList()
+    }
+  })
 }
 const handleTitleClick = (blogTitle: blogTitle) => {
   open.value = true
@@ -162,6 +179,10 @@ const columns: Record<string, any>[] = [
       {
         name: '编辑状态',
         method: editStatus
+      },
+      {
+        name: '删除',
+        method: deleteBlog
       }
     ]
   }

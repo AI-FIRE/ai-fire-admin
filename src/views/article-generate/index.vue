@@ -46,6 +46,7 @@
 </template>
 
 <script setup lang="ts" name="ArticleGenerate">
+import type { AxiosError } from 'axios'
 import request from '@/utils/http'
 import { message } from 'ant-design-vue'
 import dayjs from 'dayjs'
@@ -140,10 +141,16 @@ const generateNow = async () => {
     await request<any>({
       url: '/admin/newsBrief/generateNow',
       method: 'POST',
-      data
+      data,
+      timeout: 180 * 1000
     })
     message.success('生成成功')
     await loadConfig()
+  } catch (err) {
+    const ae = err as AxiosError
+    if (!ae?.response) {
+      message.error('请求失败或超时')
+    }
   } finally {
     generating.value = false
   }
@@ -159,4 +166,3 @@ const openLastBlog = () => {
   })
 }
 </script>
-
