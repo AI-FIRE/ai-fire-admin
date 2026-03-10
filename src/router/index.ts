@@ -23,6 +23,8 @@ import LinkList from '@/views/link/index.vue'
 import Banner from '@/views/banner/index.vue'
 import Notice from '@/views/notice/index.vue'
 import ArticleGenerate from '@/views/article-generate/index.vue'
+import Product from '@/views/product/product.vue'
+import CreateProduct from '@/views/product/createProduct.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -41,6 +43,30 @@ const routes: RouteRecordRaw[] = [
         component: Notice,
         meta: {
           name: '公告管理'
+        }
+      },
+      {
+        path: '/product',
+        name: 'Product',
+        component: Product,
+        meta: {
+          name: 'AI产品管理'
+        }
+      },
+      {
+        path: '/createProduct',
+        name: 'createProduct',
+        component: CreateProduct,
+        meta: {
+          name: '创建产品'
+        }
+      },
+      {
+        path: '/editProduct',
+        name: 'editProduct',
+        component: CreateProduct,
+        meta: {
+          name: '编辑产品'
         }
       },
       {

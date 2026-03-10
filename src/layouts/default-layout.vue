@@ -1,18 +1,13 @@
 <template>
   <a-layout>
-    <a-layout-sider width="200" style="background: #fff">
-      <a-menu
-        v-model:selectedKeys="selectedKeys"
-        mode="inline"
-        :style="{ height: '100%', borderRight: 0 }"
-        theme="dark"
-      >
-        <img :src="logo" alt="" height="32" class="logo" />
-        <span style="color: white; font-size: 18px; margin-left: 28px;margin-top: 10px;">AI-NOUS</span>
-        <a-menu-item v-for="item in menuConfigList" :key="item.path">
-          <RouterLink :to="item.path">{{ item.name }}</RouterLink>
-        </a-menu-item>
-      </a-menu>
+    <a-layout-sider width="200" style="background: #001529">
+      <div style="height: 100%; display: flex; flex-direction: column;">
+        <div style="padding: 10px 0 10px 20px;">
+          <img :src="logo" alt="" height="32" class="logo" />
+          <span style="color: white; font-size: 18px; margin-left: 10px; font-weight: bold;">AI-NOUS</span>
+        </div>
+        <Menu />
+      </div>
     </a-layout-sider>
     <a-layout style="padding: 0 24px 24px">
       <div style="display: flex; justify-content: space-between; align-items: center">
@@ -35,7 +30,12 @@ import router from '@/router'
 import logo from '@/assets/img/logo1.png'
 import { useRoute } from 'vue-router'
 import { logout } from '@/apis/user'
+import Menu from './menu.vue'
+
 export default defineComponent({
+  components: {
+    Menu
+  },
   setup() {
     const route = useRoute()
     const out = async () => {
@@ -47,48 +47,6 @@ export default defineComponent({
       out, // 退出
       logo,
       selectedKeys: ref<string[]>([route.path]),
-      menuConfigList: [
-        {
-          name: '仪表盘',
-          path: '/dashboard'
-        },
-        {
-          name: '博客',
-          path: '/blog'
-        },
-        {
-          name: '专栏',
-          path: '/special'
-        },
-        {
-          name: '分类',
-          path: '/category'
-        },
-        {
-          name: '友链',
-          path: '/link'
-        },
-        {
-          name: '轮播图',
-          path: '/banner'
-        },
-        {
-          name: '网站信息',
-          path: '/websiteinfo'
-        },
-        {
-          name: '站长信息',
-          path: '/webmasterinfo'
-        },
-        {
-          name: '公告管理',
-          path: '/notice'
-        },
-        {
-          name: '文章生成',
-          path: '/articleGenerate'
-        }
-      ]
     }
   }
 })
