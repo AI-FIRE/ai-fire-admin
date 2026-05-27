@@ -25,6 +25,7 @@ import Notice from '@/views/notice/index.vue'
 import ArticleGenerate from '@/views/article-generate/index.vue'
 import Product from '@/views/product/product.vue'
 import CreateProduct from '@/views/product/createProduct.vue'
+import ProductCategory from '@/views/product-category/index.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -67,6 +68,14 @@ const routes: RouteRecordRaw[] = [
         component: CreateProduct,
         meta: {
           name: '编辑产品'
+        }
+      },
+      {
+        path: '/productCategory',
+        name: 'ProductCategory',
+        component: ProductCategory,
+        meta: {
+          name: '工具分类管理'
         }
       },
       {

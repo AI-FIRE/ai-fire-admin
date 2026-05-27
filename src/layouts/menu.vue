@@ -16,6 +16,7 @@
       <a-menu-item key="/dashboard">仪表盘</a-menu-item>
       <a-menu-item key="/blog">博客管理</a-menu-item>
       <a-menu-item key="/product">AI产品管理</a-menu-item>
+      <a-menu-item key="/productCategory">工具分类管理</a-menu-item>
       <a-menu-item key="/category">分类管理</a-menu-item>
       <a-menu-item key="/link">友链管理</a-menu-item>
       <a-menu-item key="/special">专栏管理</a-menu-item>

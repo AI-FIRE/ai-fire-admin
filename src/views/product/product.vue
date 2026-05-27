@@ -79,6 +79,7 @@ const deleteProduct = (record: any) => {
 }
 const columns = [
   { title: 'ID', dataIndex: 'id', key: 'id' },
+  { title: '产品分类', dataIndex: 'tags', key: 'tags' },
   { title: '产品名称', dataIndex: 'name', key: 'name' },
   { title: '简介', dataIndex: 'intro', key: 'intro', width: '30%' },
   { title: '访问量', dataIndex: 'monthlyVisits', key: 'monthlyVisits' },

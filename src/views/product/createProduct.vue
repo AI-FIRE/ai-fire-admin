@@ -112,6 +112,59 @@
       />
     </a-form-item>
 
+    <a-divider>筛选信息</a-divider>
+    <a-row :gutter="16">
+      <a-col :span="8">
+        <a-form-item label="价格">
+          <a-select
+            v-model:value="formState.price"
+            style="width: 100%"
+            :options="[
+              { label: '免费', value: '免费' },
+              { label: '部分免费', value: '部分免费' },
+              { label: '免费试用', value: '免费试用' },
+              { label: '付费', value: '付费' }
+            ]"
+            allow-clear
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="8">
+        <a-form-item label="地域">
+          <a-select
+            v-model:value="formState.region"
+            style="width: 100%"
+            :options="[
+              { label: '国内', value: '国内' },
+              { label: '海外', value: '海外' }
+            ]"
+            allow-clear
+          />
+        </a-form-item>
+      </a-col>
+      <a-col :span="8">
+        <a-form-item label="形式">
+          <a-select
+            v-model:value="formState.form"
+            style="width: 100%"
+            :options="[
+              { label: '网页', value: '网页' },
+              { label: '移动应用', value: '移动应用' },
+              { label: '桌面软件', value: '桌面软件' },
+              { label: 'API/SDK', value: 'API/SDK' },
+              { label: '插件', value: '插件' },
+              { label: '本地部署', value: '本地部署' },
+              { label: '云服务', value: '云服务' },
+              { label: '模型', value: '模型' },
+              { label: '解决方案', value: '解决方案' },
+              { label: '硬件', value: '硬件' }
+            ]"
+            allow-clear
+          />
+        </a-form-item>
+      </a-col>
+    </a-row>
+
     <a-form-item :wrapper-col="{ offset: 2 }">
       <a-button type="primary" style="margin-right: 10px" html-type="submit">{{
         route.query.id ? '保存' : '创建'
@@ -157,7 +210,10 @@ const formState = ref({
   thumbnail: '',
   tags: '',
   isTop: 0,
-  cateId: null
+  cateId: null,
+  price: '',
+  region: '',
+  form: ''
 })
 
 const getDetail = async (id: string) => {
@@ -201,7 +257,7 @@ const cancel = () => {
 }
 
 const getCateList = async () => {
-  const res = await api.getCategoryList({ status: 1 })
+  const res = await api.getProductCategoryList({ status: 1 })
   cateList.value = res.data.list
 }
 </script>
